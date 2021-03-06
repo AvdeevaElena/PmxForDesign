@@ -1,0 +1,28 @@
+[
+     {
+        "athlete": "Michael Phelps", 
+        "age": 19,
+        "country": "United States",
+        "year": 2004,
+        "date": "29/08/2004",
+        "sport": "Swimming",
+        "gold": 6, 
+        "silver": 0,
+        "bronze": 2,
+        "total": 8
+    },
+
+    {
+        "athlete": "Michael Phelps", 
+        "age": 19,
+        "country": "United States",
+        "year": 2004,
+        "date": "29/08/2004",
+        "sport": "Swimming",
+        "gold": 6, 
+        "silver": 0,
+        "bronze": 2,
+        "total": 8
+    }
+      
+]
