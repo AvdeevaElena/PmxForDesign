@@ -7,9 +7,8 @@ import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
 import { columnDefs, defaultColDef } from "../Columns/columnsZapiskiRole";
+import { columnDefs480, defaultColDef480 } from "../Columns/columnsZapiskiRole480";
 import GridComponents from "./";
-
-import { uuid } from "uuidv4";
 import "../../src/App.css";
 import axios from 'axios';
 import "../test.json";
@@ -38,6 +37,8 @@ class ZapiskiTableRole extends Component {
          setGridApi: [],
          columnDefs: columnDefs,
          defaultColDef: defaultColDef,
+         columnDefs480: columnDefs480,
+         defaultColDef480: defaultColDef480,
          frameworkComponents: frameworkComponents
         };
 
@@ -49,6 +50,9 @@ class ZapiskiTableRole extends Component {
         this.gridApi.sizeColumnsToFit();
     }
 
+    columnDefs = this.state.columnDefs
+    columnDefs480 = this.state.columnDefs480
+
   componentDidMount() {
     fetch(
       "https://avdeevaelena.github.io/json/spisokZapisok.json"
@@ -57,6 +61,246 @@ class ZapiskiTableRole extends Component {
        const list = data.slice(0, 8);
        this.setState({setRowData: list });
      });
+
+     window.addEventListener('resize', function () {
+      setTimeout(function () {
+          if (window.innerWidth < 480) {
+              console.log("HELLO")
+             // gridOptions.setColumnDefs(mobileColumn);
+             // params.api.sizeColumnsToFit();
+const columnDefs480 = [
+  {
+    headerName: "Содержание",
+    field: "content",
+    cellEditor: "simpleEditor",
+    cellRenderer: 'showMultiline',
+    cellClass: 'cell-wrap',
+    autoHeight: true
+  },
+  
+  {
+    headerName: "Пациент",
+    field: "namepasient",
+    cellEditor: "simpleEditor",
+    cellRenderer: function(params) {
+      console.log ("SEACH VALUE", params.value)
+      console.log ("SEACH VALUE 2", params.data.id)
+      return '<a href="http://localhost:8081/Kartochka/'+params.data.id+'" target="_blank" rel="noopener">'+ params.value+'</a>'
+    }
+  },
+  
+  {
+    headerName: "Статус",
+    field: "status",
+    cellEditor: "autoCompleteEditor",
+    cellEditorParams: {
+      options: [
+        "Новая",
+        "Назначена",
+        "Взята в работу",
+        "Исполнена",
+        "Отменена",
+        "Удалена"
+      ]
+    }
+  } 
+];
+
+             this.setState({columnDefs: columnDefs480 });  
+            }
+            if (window.innerWidth > 480) {
+              console.log("HELLO bigger")
+              const columnDefs = [
+                {
+                  headerName: "id",
+                  field: "id",
+                  cellEditor: "simpleEditor"
+                },
+                {
+                  headerName: "Содержание",
+                  field: "content",
+                  cellEditor: "simpleEditor",
+                  cellRenderer: 'showMultiline',
+                  cellClass: 'cell-wrap',
+                  autoHeight: true
+                },
+                {
+                    headerName: "Дата создания",
+                    field: "datecreate",
+                    cellEditor: "simpleEditor"
+                  },
+                  {
+                    headerName: "Дата изменения",
+                    field: "datecreate",
+                    cellEditor: "simpleEditor"
+                  }, 
+                {
+                  headerName: "Пациент",
+                  field: "namepasient",
+                  cellEditor: "simpleEditor",
+                  cellRenderer: function(params) {
+                    console.log ("SEACH VALUE", params.value)
+                    console.log ("SEACH VALUE 2", params.data.id)
+                    return '<a href="http://localhost:8081/Kartochka/'+params.data.id+'" target="_blank" rel="noopener">'+ params.value+'</a>'
+                  }
+                },
+                {
+                  headerName: "Автор",
+                  field: "athor",
+                  cellEditor: "simpleEditor"
+                },
+                {
+                  headerName: "Исполнитель",
+                  field: "executor",
+                  cellEditor: "simpleEditor"
+                },
+                {
+                    headerName: "Фактическая дата",
+                    field: "datedone",
+                    cellEditor: "simpleEditor"
+                  },
+                {
+                  headerName: "Статус",
+                  field: "status",
+                  cellEditor: "autoCompleteEditor",
+                  cellEditorParams: {
+                    options: [
+                      "Новая",
+                      "Назначена",
+                      "Взята в работу",
+                      "Исполнена",
+                      "Отменена",
+                      "Удалена"
+                    ]
+                  }
+                }   
+              ];            
+             this.setState({columnDefs: columnDefs });  
+            }
+          }.bind(this));
+      }.bind(this));
+  }
+
+  componentWillUnmount() {
+
+    window.addEventListener('resize', function () {
+      setTimeout(function () {
+          if (window.innerWidth <= 480) {
+              console.log("HELLO")
+             // gridOptions.setColumnDefs(mobileColumn);
+             // params.api.sizeColumnsToFit();
+const columnDefs480 = [
+  {
+    headerName: "Содержание",
+    field: "content",
+    cellEditor: "simpleEditor",
+    cellRenderer: 'showMultiline',
+    cellClass: 'cell-wrap',
+    autoHeight: true
+  },
+  
+  {
+    headerName: "Пациент",
+    field: "namepasient",
+    cellEditor: "simpleEditor",
+    cellRenderer: function(params) {
+      console.log ("SEACH VALUE", params.value)
+      console.log ("SEACH VALUE 2", params.data.id)
+      return '<a href="http://localhost:8081/Kartochka/'+params.data.id+'" target="_blank" rel="noopener">'+ params.value+'</a>'
+    }
+  },
+  
+  {
+    headerName: "Статус",
+    field: "status",
+    cellEditor: "autoCompleteEditor",
+    cellEditorParams: {
+      options: [
+        "Новая",
+        "Назначена",
+        "Взята в работу",
+        "Исполнена",
+        "Отменена",
+        "Удалена"
+      ]
+    }
+  } 
+];
+
+             this.setState({columnDefs: columnDefs480 });  
+            }
+if (window.innerWidth > 480) {
+  console.log("HELLO bigger")
+  const columnDefs = [
+    {
+      headerName: "id",
+      field: "id",
+      cellEditor: "simpleEditor"
+    },
+    {
+      headerName: "Содержание",
+      field: "content",
+      cellEditor: "simpleEditor",
+      cellRenderer: 'showMultiline',
+      cellClass: 'cell-wrap',
+      autoHeight: true
+    },
+    {
+        headerName: "Дата создания",
+        field: "datecreate",
+        cellEditor: "simpleEditor"
+      },
+      {
+        headerName: "Дата изменения",
+        field: "datecreate",
+        cellEditor: "simpleEditor"
+      }, 
+    {
+      headerName: "Пациент",
+      field: "namepasient",
+      cellEditor: "simpleEditor",
+      cellRenderer: function(params) {
+        console.log ("SEACH VALUE", params.value)
+        console.log ("SEACH VALUE 2", params.data.id)
+        return '<a href="http://localhost:8081/Kartochka/'+params.data.id+'" target="_blank" rel="noopener">'+ params.value+'</a>'
+      }
+    },
+    {
+      headerName: "Автор",
+      field: "athor",
+      cellEditor: "simpleEditor"
+    },
+    {
+      headerName: "Исполнитель",
+      field: "executor",
+      cellEditor: "simpleEditor"
+    },
+    {
+        headerName: "Фактическая дата",
+        field: "datedone",
+        cellEditor: "simpleEditor"
+      },
+    {
+      headerName: "Статус",
+      field: "status",
+      cellEditor: "autoCompleteEditor",
+      cellEditorParams: {
+        options: [
+          "Новая",
+          "Назначена",
+          "Взята в работу",
+          "Исполнена",
+          "Отменена",
+          "Удалена"
+        ]
+      }
+    }   
+  ];
+ this.setState({columnDefs: columnDefs });  
+}
+
+          }.bind(this));
+      }.bind(this));
   }
 
   retrieveTutorials() {
@@ -79,7 +323,6 @@ class ZapiskiTableRole extends Component {
              <div id="myGrid" style={{height: "90%", position: "absolute", width: "90%",  paddingLeft: "15px" }} className="ag-theme-alpine">
           <AgGridReact
             columnDefs={this.state.columnDefs}
-            defaultColDef={this.state.defaultColDef}
             rowData={rowData}
             cellRenderer={function(params) {
               return '<a href="https://www.google.com" target="_blank" rel="noopener">'+ params.data.status+'</a>'
@@ -113,3 +356,21 @@ class ZapiskiTableRole extends Component {
   }
 }
 export default ZapiskiTableRole;
+
+var gridOptions = {
+  columnDefs: [
+      { field: "athlete", width: 150 },
+      { field: "age", width: 90 },
+      { field: "country", width: 150 },
+      { field: "year", width: 90 },
+      { field: "date", width: 150 },
+      { field: "sport", width: 150 },
+      { field: "gold", width: 100 },
+      { field: "silver", width: 100 },
+      { field: "bronze", width: 100 },
+      { field: "total", width: 100 },
+  ],
+};
+
+
+

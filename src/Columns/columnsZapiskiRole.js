@@ -7,7 +7,7 @@ export const columnDefs = [
       cellEditor: "simpleEditor"
     },
     {
-      headerName: "Содержание ref",
+      headerName: "Содержание",
       field: "content",
       cellEditor: "simpleEditor",
       cellRenderer: 'showMultiline',
@@ -63,14 +63,6 @@ export const columnDefs = [
           "Удалена"
         ]
       }
-    },
-    {
-      headerName: "Действия",
-      colId: "actions",
-      cellRenderer: "actionsRendererWithoutDelete",
-      editable: false,
-      filter: false,
-      minWidth: 220
     }
     
   ];
